@@ -38,6 +38,7 @@ namespace Student_Panel_ITI
 
 
 
+
             builder.Services.AddIdentity<AppUser,IdentityRole>()
                 .AddEntityFrameworkStores<MainDBContext>().AddDefaultTokenProviders();
 
