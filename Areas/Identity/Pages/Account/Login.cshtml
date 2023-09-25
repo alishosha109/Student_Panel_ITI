@@ -1,0 +1,80 @@
+﻿@page
+@model LoginModel
+
+@{
+    Layout = null; // or false
+}
+
+<!-- Your view content goes here -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/register/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/register/css/style.css">
+</head>
+<body>
+    <div class="main">
+        <!-- Sing in  Form -->
+        <section class="sign-in">
+            <div class="container">
+                <div class="screen"></div>
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <div class="logo">
+                            <span class="navbar-brand" style="margin-left: 24px;">
+                                <img src="~/assets/images/iti-logo.png" alt="Logo" width="33" height="50" class="d-inline-block align-text-top">
+                            </span>
+                            <div class="navbarvr"></div>
+                            <span>ITI-Hub</span>
+                        </div>
+                    </div>
+                    <div class="signin-form">
+                        <h2 class="form-title">Sign In</h2>
+                        <form  id="account" method="POST" class="register-form" >
+                            <div class="form-group">
+                                <label asp-for="Input.UserName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Input.UserName" type="text"  placeholder="Enter your username"/>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Input.Password"><i class="zmdi zmdi-lock"></i></label>
+                                <input asp-for="Input.Password"  type="password"  placeholder="Enter your password" />
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="Input.RememberMe" type="checkbox"  class="agree-term" />
+                                <label asp-for="Input.RememberMe" class="label-agree-term"><span><span></span></span>Remember me</label>
+                            </div>
+                           @* <div class="form-group form-button">
+                                <a href="../index.html" class="form-submit loginBbtn">Log in</a>
+                            </div>*@
+
+                            <div class="form-group form-button">
+                                <button id="login-submit" type="submit" class="form-submit loginBbtn" style="width:100%">Log in</button>
+                            </div>
+                            
+
+                        </form>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="~/register/vendor/jquery/jquery.min.js"></script>
+    <script src="~/register/js/main.js"></script>
+  
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="col-md-10 text-center content">
+    <div class="container-fluid">
+        <div class="row col-md-12">
+            <div class="r1" style="padding-bottom: 0;">
+                <h3 style="padding-left: 33px;">Your Details</h3>
+            </div>
+        </div>
+        <div class="row col-md-10" style="margin-left: 64px;">
+            <form asp-action="Create" style="margin-top: 32px; text-align: left; width: 50%;">
+                <label style="font-size: 20px; padding-left: 2px;" class="form-label">Name</label>
+                <input type="text" class="form-control" style="margin-bottom: 12px;">
+
+                <label style="font-size: 20px; padding-left: 2px;" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" style="margin-bottom: 12px;">
+
+                <label style="font-size: 20px; padding-left: 2px;" class="form-label">Intake Number</label>
+                <input type="number" class="form-control" style="margin-bottom: 12px;">
+
+                <label style="font-size: 20px; padding-left: 2px;" class="form-label">Track Name</label>
+                <input type="text" class="form-control" style="margin-bottom: 12px;">
+            </form>
+        </div>
+    </div>
+</div>

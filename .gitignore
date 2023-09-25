@@ -1,0 +1,97 @@
+# Visual Studio files
+.vscode/
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Compiled files
+bin/
+obj/
+
+# NuGet packages
+packages/
+
+# User-specific files
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+
+# Cache and logs
+*.log
+*.cache
+
+# Debug and release files
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.user
+*.aps
+*.clw
+*.dbg
+*.dbp
+*.dep
+*.dsm
+*.dsp
+*.dsw
+*.ilk
+*.opt
+*.pdb
+*.plg
+*.plk
+*.sbr
+*.scc
+*.sdf
+*.suo
+*.swp
+*.tlh
+*.tli
+*.tlp
+*.pl
+*.class
+*.psess
+*.vsp
+*.vspx
+*.svdlog
+*.suo
+*.user
+*.orig
+*.vsidx
+
+# .NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Rider
+.idea/
+*.sln.iml
+
+# User-specific files
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+
+# Documentation files
+DocumentDb
+
+# Entity Framework Core
+DatabaseGeneratedOption.None
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates

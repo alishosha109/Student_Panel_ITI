@@ -1,0 +1,319 @@
+/* *********************************************************************** */
+/* Index */
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    background-color: #6c757d17;
+    height: 100%;
+}
+
+.card {
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    width: 286px;
+    height: 262px;
+    border: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+#newUserBtn {
+    position: absolute;
+    top: 100px;
+    left: 400px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 35px;
+    background-color: white;
+    border-radius: 0.375rem;
+}
+
+.dropdown-content {
+    margin-left: 8px;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.btn {
+    padding: 8px 24px;
+}
+
+.logoutbtn{
+    background-color: #E03030; 
+    color: white;
+    margin-right: 24px; 
+}
+
+.logoutbtn:hover{
+    background-color: #B32626;
+    color: white;
+}
+
+.regbtn {
+    margin-right: 16px; 
+    background-color: #6c757d17;
+}
+
+.regbtn:hover {
+    border: 1px solid black; 
+}
+
+.navbarvr {
+    background-color: #cd2929;
+    height: 50px; 
+    margin: 8px 10px 0 -8px; 
+    padding: 1px;
+}
+
+.welcome {
+    margin: 40px 0 40px 36px;
+}
+
+.d1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.allintakes {
+    margin: auto 36px;
+}
+
+.container {
+    margin-top: 100px;
+}
+
+/* ********************************************************* */
+/* Track */
+
+.nav-title {
+    font-size: 24px;
+    padding-left: 10px;
+}
+
+.navs {
+    font-size: 16px;
+}
+
+.r1 {
+    padding-top: 40px;
+    padding-bottom: 16px;
+    padding-right: 52px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-btn {
+    background-color: white;
+    margin-left: 16px;
+}
+
+.filter-btn:hover {
+    border: 1px solid black;
+}
+
+.table {
+    margin-left: 48px;
+    text-align: left;
+}
+
+
+/* 3 dots options */
+.options-menu .btn-secondary {
+    padding: 0.375rem 0.5rem;
+}
+
+.options:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.options {
+    padding: 8px;
+}
+
+/* .track-card {
+    background: url(assets/images/trackwallpaper.jfif);
+    width: 286px;
+    height: 262px;
+} */
+
+
+/* ***************************************************************** */
+/* Footer (Pagination) */
+
+.footer {
+    display: grid;
+    place-items: end end;
+    height: 100%;
+    margin-right: 65px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.sidebar {
+    flex: 0 0 19%;
+    background-color: #f8f9fa;
+}
+
+.content {
+    flex: 1;
+    /* background-color: #6c757d17; */
+}
+
+#myTable {
+    border: 1px solid rgb(163, 163, 163);
+    border-radius: 6px;
+    overflow: hidden;
+    border-style: hidden; /* hide standard table (collapsed) border */
+    box-shadow: 0 0 0 1px #e2e3e5; /* this draws the table border  */
+}
+
+
+.popover-body {
+    padding: 8px;
+}
+
+tr:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
+
+.act {
+    background-color: #1877F2;
+}
+
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-left: 16px;
+}
+
+/* ********************************************************************* */
+/* floating screen */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.floating-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.floating-screen.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.floating-screen h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.floating-screen p {
+    margin-bottom: 20px;
+}
+
+/* ********************************************************************* */
+/* courses */
+
+.box {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #333;
+    margin: 16px;
+}
+
+
+/* ********************************************************************* */
+/* upload btn */
+
+.file {
+    position: relative;
+    overflow: hidden;
+}
+
+input[type="file"] {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+
+.courseBtns {
+    border: 1px solid #c0c0c0;
+    margin-left: 8px;
+}
+
+.courseBtns:hover {
+    background-color: #cececc;
+}
