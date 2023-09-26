@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Student_Panel_ITI.Models;
+using System.Security.Claims;
 
 namespace Student_Panel_ITI.Controllers
 {
@@ -32,6 +33,9 @@ namespace Student_Panel_ITI.Controllers
 
         public IActionResult Index()
         {
+
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
             if (User.Identity.IsAuthenticated)
             {
 
@@ -47,13 +51,6 @@ namespace Student_Panel_ITI.Controllers
 
                 };
 
-                //var user = userManager.GetUserAsync(User).Result; // Get the current user
-
-                //if (user != null)
-                //{
-                //    // You can pass user-related data to the view here
-                //    ViewData["FullName"] = user.FullName;
-                //}
                 return View(hmPageViewModel);
 
             }

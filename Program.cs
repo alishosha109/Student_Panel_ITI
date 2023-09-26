@@ -3,13 +3,11 @@ using Student_Panel_ITI.Models;
 using Student_Panel_ITI.Repos;
 using Student_Panel_ITI.Repos.Interfaces;
 using Student_Panel_ITI.Repos.RepoServices;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Debug;
-using System.Security.Principal;
-using Student_Panel_ITI.Repos;
+
+
 
 namespace Student_Panel_ITI
 {
@@ -85,16 +83,18 @@ namespace Student_Panel_ITI
                 app.UseHsts();
             }
 
+            app.UseAuthorization();
+            app.UseAuthentication();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
 
 
 
-          
+
 
             app.MapControllerRoute(
                 name: "default",

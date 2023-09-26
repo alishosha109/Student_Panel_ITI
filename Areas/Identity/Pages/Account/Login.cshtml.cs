@@ -76,8 +76,6 @@ namespace Student_Panel_ITI.Areas.Identity.Pages.Account
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
             ReturnUrl = returnUrl;
         }
 
@@ -97,13 +95,8 @@ namespace Student_Panel_ITI.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");
-                        var userName = User.Identity.Name; // Get the username
-                        _logger.LogInformation($"User logged in. Username: {userName}");
-
-                        _logger.LogInformation($"Login successfully successfully: {User}");
 
                         returnUrl = Url.Action("Index", "Home");
-
 
                         return LocalRedirect(returnUrl);
                     }
