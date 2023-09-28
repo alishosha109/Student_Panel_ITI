@@ -30,6 +30,7 @@ namespace Student_Panel_ITI.Repos
 
 
         public void CreateStudent_Submission(Student_Submission student_Submission);
+        public void CreateStudent_Submission(List<Student_Submission> student_Submission);
         public void CreateStudent_Submission(int stdID, int crsDayID, string submissionPath);
     }
 }

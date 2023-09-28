@@ -100,6 +100,16 @@ namespace Student_Panel_ITI.Repos
             Context.Student_Submissions.Add(student_Submission);
             Context.SaveChanges();
         }
+
+        void IStudent_SubmissionRepository.CreateStudent_Submission(List<Student_Submission> student_Submission)
+        {
+            foreach (var item in student_Submission)
+            {
+                Context.Student_Submissions.Add(item);
+
+            }
+            Context.SaveChanges();
+        }
         void IStudent_SubmissionRepository.CreateStudent_Submission(int stdID, int crsDayID, string submissionPath)
         {
        

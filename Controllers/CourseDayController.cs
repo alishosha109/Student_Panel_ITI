@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Student_Panel_ITI.ViewModels;
+using Student_Panel_ITI.Repos;
 
 namespace Student_Panel_ITI.Areas.InstructorsArea.Controllers
 {
-    [Area("InstructorsArea")] //have to be added(mandatory)
     public class CourseDayController : Controller
     {
         private readonly ICourseDayRepository courseDayRepo;
@@ -17,32 +17,31 @@ namespace Student_Panel_ITI.Areas.InstructorsArea.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly IMaterialRepository materialRepo;
         private readonly ICourse_Day_MaterialRepository courseDayMaterialRepo;
+        private readonly IStudent_SubmissionRepository studentSubmissionRepo;
         public CourseDayController(ICourseDayRepository _courseDayRepo, 
             IWebHostEnvironment _hostingEnvironment, 
             UserManager<AppUser> _userManager, 
             IMaterialRepository _materialRepo, 
-            ICourse_Day_MaterialRepository _courseDayMaterialRepo)
+            ICourse_Day_MaterialRepository _courseDayMaterialRepo,
+            IStudent_SubmissionRepository _studentSubmissionRepo)
         {
             courseDayRepo = _courseDayRepo;
             webHostingEnvironment = _hostingEnvironment;
             userManager = _userManager;
             materialRepo = _materialRepo;
             courseDayMaterialRepo = _courseDayMaterialRepo;
+            studentSubmissionRepo = _studentSubmissionRepo;
         }
 
 
 
 
         //id(courseID) , name(courseName)
-        public ActionResult Index(int id , string name, int intakeID, int trackID, string intakeName, string trackName)
+        public ActionResult Index(int id , string name)
         {
             ViewBag.Id = id;    
             ViewBag.Name = name;  
-            
-            ViewBag.IntakeName = intakeName;    
-            ViewBag.TrackName = trackName;    
-            ViewBag.IntakeID = intakeID;    
-            ViewBag.TrackID = trackID;    
+             
             
             return View(courseDayRepo.GetCourseDaysByCourseID(id));
         }
@@ -53,90 +52,74 @@ namespace Student_Panel_ITI.Areas.InstructorsArea.Controllers
 
 
         //id(course id) , name(course name)  ---> Materials & Tsak Table 
-        public ActionResult Details(int id, string name, int intakeID, int trackID, string intakeName, string trackName , int coursedayID, int coursedayNum)
+        public ActionResult Details(int id, string name, int coursedayID, int coursedayNum)
         {
+            var courseDay = courseDayRepo.GetCourseDaybyID(id);
+            ViewBag.CourseDay = courseDay;
+
             ViewBag.Id = id;
             ViewBag.Name = name;
 
-            ViewBag.IntakeName = intakeName;
-            ViewBag.TrackName = trackName;
-            ViewBag.IntakeID = intakeID;
-            ViewBag.TrackID = trackID;
+            
             ViewBag.CourseDayId = coursedayID;
             ViewBag.CourseDayNum = coursedayNum;
 
-            ViewBag.Materials = new List<IFormFile>();
+            ViewBag.Submissions = new List<IFormFile>();
 
             return View(courseDayMaterialRepo.GetCourseDaysbyCourseDayID(coursedayID));
         }
 
 
         [HttpPost]
-        public ActionResult Details(List<IFormFile> Materials,  int id, string name, int intakeID, int trackID, string intakeName, string trackName, int coursedayID, int coursedayNum)
+        public ActionResult UploadSubmissions(int id, string name, int coursedayID, int coursedayNum)
         {
             if (ModelState.IsValid)
             {
+                var Submissions = Request.Form.Files;
+
                 string? uniqueFileName = null; //varaible to store the materials name after make it uniqe using GUID.
-                string? instructorID = userManager.GetUserId(User);
+                string? userID = userManager.GetUserId(User);
 
-                List<Material> materials = new();
+                List<Student_Submission> submissions = new();
 
-                if (Materials != null)
+                if (Submissions != null)
                 {
-                    string MaterialsFilePath = Path.Combine(webHostingEnvironment.WebRootPath, "Materials"); //where the materials gonna be store(~/wwwroot/Materials/)
-                    foreach (var material in Materials)
+                    string SubmissionsFilePath = Path.Combine(webHostingEnvironment.WebRootPath, "Materials"); //where the materials gonna be store(~/wwwroot/Materials/)
+                    foreach (var submission in Submissions)
                     {
-                        uniqueFileName = Guid.NewGuid().ToString() + "_" + material.FileName; //give each material a uniqu name to prevent override Files
-                        string MaterialPath = Path.Combine(MaterialsFilePath, uniqueFileName); //store the selected materials in "Materials" file(make string path: ~/wwwroot/Materials/filename.txt)
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + submission.FileName; //give each material a uniqu name to prevent override Files
+                        string SubmissionPath = Path.Combine(SubmissionsFilePath, uniqueFileName); //store the selected materials in "Materials" file(make string path: ~/wwwroot/Materials/filename.txt)
 
-                        material.CopyTo(new FileStream(MaterialPath, FileMode.Create));
+                        submission.CopyTo(new FileStream(SubmissionPath, FileMode.Create));
 
 
-                        materials.Add(new Material() { Name = material.FileName.Split('.')[0], Path = MaterialPath, Type = Path.GetExtension(material.FileName), InstructorID = instructorID });
+                        submissions.Add(new Student_Submission() { CourseDayID = coursedayID, SubmissionPath = SubmissionPath, SubmissionGrade = 0, StudentID = userID });
                     }
 
-                    materialRepo.CreateMaterials(materials);
+                    studentSubmissionRepo.CreateStudent_Submission(submissions);
 
 
-                    List<Course_Day_Material> cdms = new();
+                    var courseDay = courseDayRepo.GetCourseDaybyID(id);
+                    ViewBag.Id = id;
+                    ViewBag.Name = name;
 
-                    foreach (var material in materials)
-                    {
-                        cdms.Add(new Course_Day_Material() { CourseID = id, CourseDayID = coursedayID, MaterialID = material.ID });
-                    }
+                    ViewBag.CourseDay = courseDay;
+                    ViewBag.CourseDayId = coursedayID;
+                    ViewBag.CourseDayNum = coursedayNum;
 
-                    courseDayMaterialRepo.CreateCourseDayMaterial(cdms);
+                    ViewBag.Submissions = new List<IFormFile>();
 
-                    return RedirectToAction(nameof(Details), new { id, name, intakeID, trackID, intakeName, trackName, coursedayID, coursedayNum });
+                    return RedirectToAction(nameof(Details), new { id, name, coursedayID, coursedayNum });
                 }
             }
 
-            return  View();
-              
-        }
-
-
-
-
-
-
-        [HttpGet]
-        public ActionResult Create(int Id, string name, int intakeID, int trackID, string intakeName, string trackName)
-        {
-            ViewBag.Id = Id;
-            ViewBag.Name = name;
-
-            ViewBag.IntakeName = intakeName;
-            ViewBag.TrackName = trackName;
-            ViewBag.IntakeID = intakeID;
-            ViewBag.TrackID = trackID;
-
             return View();
+
         }
 
-        
 
-        
+
+
 
 
 

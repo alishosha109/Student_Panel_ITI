@@ -13,7 +13,10 @@
         <div class="container" style="flex-wrap: wrap; justify-content: center; width: 999px; margin-top: 16px;">
             @foreach (var course in Model)
             {
-                <a class="box" href="coursesDays.html">
+                <a class="box" asp-action="Index"
+                               asp-route-Id=@course.ID
+                               asp-route-Name=@course.Name
+                               asp-controller="CourseDay">
                     <h2>@course.Name</h2>
                 </a>
             }

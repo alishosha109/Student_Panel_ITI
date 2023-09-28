@@ -68,6 +68,7 @@ namespace Student_Panel_ITI.Repos
         Student IStudentRepository.getStudentbyID(string studentID)
         {
             var student = Context.Students
+                                 .Where(s=>s.AspNetUserID == studentID)
                                  .Include(s=>s.Intake)
                                  .Include(s=>s.Track)
                                  .Include(s => s.AspNetUser)
