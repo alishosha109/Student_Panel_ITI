@@ -51,7 +51,10 @@ namespace Student_Panel_ITI.Controllers
 
                 };
 
-                return View(hmPageViewModel);
+                string stdId = userManager.GetUserId(User);
+                Student std = studentRepository.getStudentbyID(stdId);
+
+                return View(std);
 
             }
             else

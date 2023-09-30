@@ -1,6 +1,140 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model Student_Panel_ITI.Models.Student
+
+
+<style>
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 70px;
+    }
+
+    .card1 {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 320px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        padding: 32px;
+        /*overflow: hidden;*/
+        border-radius: 10px;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        background-color: transparent;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: black;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        position: relative;
+    }
+
+        .content .heading {
+            font-weight: 700;
+            font-size: 32px;
+            padding-top: 32px;
+            margin: 0 auto 24px;
+        }
+
+        .content .para {
+            line-height: 1.5;
+            font-size: 16px;
+        }
+
+        .content .btn {
+            color: #e8e8e8;
+            text-decoration: none;
+            padding: 10px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+    .card1::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 5px;
+        background: white;
+        z-index: -1;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+
+    .card1:hover::before {
+        height: 100%;
+    }
+
+    .card1:hover {
+        box-shadow: none;
+    }
+
+        .card1:hover .circle {
+            border: 8px solid #f1f2f3;
+        }
+
+    p {
+        margin-bottom: 8px;
+        position: relative;
+    }
+
+    .img {
+        position: absolute;
+        left: -22px;
+        top: 5px;
+        width: 15px;
+        height: 15px;
+    }
+
+    .wrapprer {
+        text-align: left;
+        margin-bottom: 8px;
+    }
+
+    #intake {
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+    }
+
+    #track {
+        position: absolute;
+        right: 0;
+        bottom: -8px;
+    }
+
+    .circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 20px;
+        position: absolute;
+        top: -70px;
+        overflow: hidden;
+        border: 8px solid #6c757d17;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+
+    .user-image {
+        width: 100px;
+        height: 100px;
+        /*border-radius: 50%;*/
+        position: relative;
+    }
+
+</style>
+
+
 
 <div class="col-md-10 text-center content">
     <div class="container-fluid">
@@ -9,20 +143,34 @@
                 <h3 style="padding-left: 33px;">Your Details</h3>
             </div>
         </div>
-        <div class="row col-md-10" style="margin-left: 64px;">
-            <form asp-action="Create" style="margin-top: 32px; text-align: left; width: 50%;">
-                <label style="font-size: 20px; padding-left: 2px;" class="form-label">Name</label>
-                <input type="text" class="form-control" style="margin-bottom: 12px;">
+        <div class="row col-md-10 wrapper" style="margin-left: 64px;">
+            <div class="card1">
+                <div class="circle">
+                    <img src="~/images/user.svg" alt="User Image" class="user-image">
+                </div>
+                <div class="content">
+                    <p class="heading">@Model.AspNetUser.FullName</p>
 
-                <label style="font-size: 20px; padding-left: 2px;" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" style="margin-bottom: 12px;">
+                    <div class="wrapprer">
+                        <p class="para"><img class="img" src="~/images/calendar.svg" />@Model.CreationDate.ToString("dd/MM/yyyy")</p>
+                        <p class="para"><img class="img" src="~/images/email.svg" />@Model.AspNetUser.Email</p>
+                        <p class="para"><img class="img" src="~/images/phone.svg" />@Model.AspNetUser.PhoneNumber</p>
+                        @if (@Model.IsGraduated)
+                        {
+                            <p class="para"><img class="img" src="~/images/graduate.svg" />You are graduated</p>
+                        }
+                        else
+                        {
+                            <p class="para"><img class="img" src="~/images/student.svg" />You are student</p>
+                        }
+                    </div>
 
-                <label style="font-size: 20px; padding-left: 2px;" class="form-label">Intake Number</label>
-                <input type="number" class="form-control" style="margin-bottom: 12px;">
 
-                <label style="font-size: 20px; padding-left: 2px;" class="form-label">Track Name</label>
-                <input type="text" class="form-control" style="margin-bottom: 12px;">
-            </form>
+                    <br />
+                    <small id="intake">@Model.Intake.Name</small>
+                    <small id="track">@Model.Track.Name</small>
+                </div>
+            </div>
         </div>
     </div>
 </div>
