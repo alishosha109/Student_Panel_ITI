@@ -1,14 +1,30 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Student_Panel_ITI.Models;
+using Student_Panel_ITI.Repos;
+using Student_Panel_ITI.Repos.Interfaces;
 
 namespace Admin_Panel_ITI.Areas.InstructorsArea.Controllers
 {
     public class ExamController : Controller
     {
+        private readonly IExamRepository examRepository;
+        private readonly IStudentRepository studentRepository;
+        private readonly UserManager<AppUser> userManager;
+
+        public ExamController(IExamRepository examRepository, IStudentRepository studentRepository, UserManager<AppUser> userManager)
+        {
+            this.examRepository = examRepository;
+            this.studentRepository = studentRepository;
+            this.userManager = userManager;
+        }
         // GET: ExamController
         public ActionResult Index()
         {
-            return View();
+            var student = studentRepository.getStdbyID(userManager.GetUserId(User));
+            ViewBag.trackName = student.Track.Name;
+            return View(examRepository.GetExams(student.IntakeID, student.TrackID));
         }
 
         // GET: ExamController/Details/5

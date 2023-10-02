@@ -77,6 +77,15 @@ namespace Student_Panel_ITI.Repos
             return student;
         }
 
+        Student IStudentRepository.getStdbyID(string studentID)
+        {
+            var student = Context.Students
+                                 .Where(s => s.AspNetUserID == studentID)
+                                 .Include(s=>s.Track)
+                                 .FirstOrDefault();
+            return student;
+        }
+
         int IStudentRepository.getStudentNumber()
         {
             return Context.Students.Count();

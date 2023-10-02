@@ -47,7 +47,11 @@ namespace Student_Panel_ITI.Repos.RepoServices
         List<Exam_Std_Question> IExam_Std_QuestionRepository.GetExambyStdIDExmID(int stdID, int exmID)
         {
             return Context.Exam_Std_Questions.Where(es => es.StudentID == stdID.ToString() && es.ExamID == exmID).Include(es=>es.Question).ToList();
+        }
 
+        List<Exam_Std_Question> IExam_Std_QuestionRepository.GetExambyExamID(int exmID)
+        {
+            return Context.Exam_Std_Questions.Where(e => e.ExamID == exmID).ToList();
         }
 
         List<Exam_Std_Question> IExam_Std_QuestionRepository.GetExamsbyqid(int qid)
@@ -60,7 +64,6 @@ namespace Student_Panel_ITI.Repos.RepoServices
         {
             var esq = Context.Exam_Std_Questions.SingleOrDefault(esq => esq.ExamID == examID && esq.StudentID == studentID.ToString() && esq.QuestionID == questionID);
             return esq;
-
         }
 
         void IExam_Std_QuestionRepository.UpdateExam_Std_Question(int examID, int studentID, int questionID, Exam_Std_Question main_esq)

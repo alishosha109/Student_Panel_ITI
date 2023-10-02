@@ -2,6 +2,7 @@
 using Student_Panel_ITI.Models;
 using Student_Panel_ITI.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Student_Panel_ITI.Repos.RepoServices
 {
@@ -55,10 +56,11 @@ namespace Student_Panel_ITI.Repos.RepoServices
         Exam IExamRepository.GetExambyID(int examID)
         {
             var exam = Context.Exams
-                .Include(e => e.Instructor).ThenInclude(i => i.AspNetUser)
+                .Include(e => e.Instructor)
+                .ThenInclude(i => i.AspNetUser)
                 .Include(e => e.Course)
                 .Include(e => e.Exam_Question)
-                    .ThenInclude(eq => eq.Question)
+                .ThenInclude(eq => eq.Question)
                 .FirstOrDefault(ex => ex.ID == examID);
 
             return exam;
@@ -81,14 +83,42 @@ namespace Student_Panel_ITI.Repos.RepoServices
                 .ToList();
         }
 
+        List<Exam> IExamRepository.GetExamsByIntakeTrackId(int intakeId, int trackId)
+        {
+            return ( from e in Context.Exams
+                     join itc in Context.Intake_Track_Courses on e.CourseID equals itc.CourseID
+                     where itc.IntakeID == intakeId && itc.TrackID == trackId
+                     select e )
+                     .ToList();
+            //return ( from e in Context.Exams
+            //           join sqe in Context.Exam_Std_Questions on e.ID equals sqe.ExamID
+            //           where sqe.StudentID == stdId
+            //            //join itc in Context.Intake_Track_Courses on e.CourseID equals itc.CourseID
+            //            //where itc.IntakeID == intakeId
+            //           select e )
+            //           .Distinct()
+            //           .Include(e => e.Course)
+            //           .ToList();
+
+            //return Context.Exams
+            //    .Include(e => e.Instructor)
+            //    .ThenInclude(i => i.AspNetUser)
+            //    .Include(e => e.Course)
+            //    .Include(e => e.Student_Quest_Exam)
+            //    .ToList();
+        }
+
 
         List<Exam> IExamRepository.GetExamsbycourseID(int courseID)
         {
-            var exams = Context.Exams.Include(e => e.Instructor).ThenInclude(i => i.AspNetUser)
-                                .Include(e => e.Course)
-                                    .Where(e => e.CourseID == courseID)
-                                       .Include(e => e.Student_Quest_Exam)
-                                            .ToList();
+            var exams = Context.Exams
+                .Include(e => e.Instructor)
+                .ThenInclude(i => i.AspNetUser)
+                .Include(e => e.Course)
+                .Where(e => e.CourseID == courseID)
+                .Include(e => e.Student_Quest_Exam)
+                .ToList();
+
             return exams;
         }
 

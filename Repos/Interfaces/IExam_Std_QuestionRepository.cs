@@ -14,6 +14,7 @@ namespace Student_Panel_ITI.Repos.Interfaces
 
         public Exam_Std_Question GetExam_Std_QuestionbyID(int examID, int studentID, int questionID);
 
+        public List<Exam_Std_Question> GetExambyExamID(int exmID);
 
         public void UpdateExam_Std_Question(int examID, int studentID, int questionID, Exam_Std_Question esq);
 

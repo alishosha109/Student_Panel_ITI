@@ -15,6 +15,7 @@ namespace Student_Panel_ITI.Repos.Interfaces
 
 
         public List<Exam> GetExams(int pageNumber, int pageSize);
+        public List<Exam> GetExamsByIntakeTrackId(int intakeId, int trackId);
 
 
         public void UpdateExam(int examID, Exam exam);

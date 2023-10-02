@@ -12,6 +12,8 @@ namespace Student_Panel_ITI.Repos
 
 
         public Student getStudentbyID(string studentbyID);
+
+        public Student getStdbyID(string id);
         public List<Student> getStudents(int pageNumber, int pageSize);
         public void UpdateStudent(string studentID, Student student);
 

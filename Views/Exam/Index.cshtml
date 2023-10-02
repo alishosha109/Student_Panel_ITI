@@ -1,0 +1,86 @@
+﻿@using Student_Panel_ITI.Repos.Interfaces;
+@model IEnumerable<Student_Panel_ITI.Models.Exam>
+@inject IExam_Std_QuestionRepository examStdQuestion
+
+         
+<!-- Main (tales + btns) -->
+<div class="col-md-10 text-center content">
+    <div class="container-fluid">
+        <div class="row col-md-12">
+            <div class="r1">
+                <h3 style="padding-left: 33px;">All Exams in @ViewBag.trackName</h3>
+            </div>
+        </div>
+        <div class="row col-md-11">
+            <table class="table table-hover" id="myTable">
+                <thead class="table-secondary">
+                    <tr>
+                        <th style="padding-left: 24px;">
+                            <label asp-for="@Model.FirstOrDefault().Name"></label>
+                            <svg onclick="sortTable(0)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </th>                       
+                        <th>
+                            <label asp-for="@Model.FirstOrDefault().Duration"></label>
+                            <svg onclick="sortTable(1)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </th>
+                        <th>
+                            <label asp-for="@Model.FirstOrDefault().CreationDate"></label>
+                            <svg onclick="sortTable(2)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </th>
+                        <th>
+                            <label asp-for="@Model.FirstOrDefault().Course.Name">Course Name</label>
+                            <svg onclick="sortTable(3)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </th>
+                        <th>
+                            <label>Grade</label>
+                            <svg onclick="sortTable(4)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        string grade = "0";
+                    }
+                    @foreach(var exam in Model)
+                    {
+                        var studentExam = examStdQuestion.GetExambyExamID(exam.ID);
+                        if(studentExam.Count != 0)
+                        {
+                            grade = "0";
+                            foreach (var question in studentExam)
+                            {
+                                var result = int.Parse(grade) + question.StudentGrade;
+                                grade = result.ToString();
+                            }
+                        } 
+                        else
+                        {
+                            grade = "Not assigned";
+                        }
+                        <tr>
+                            <td style="padding-left: 24px;">@exam.Name</td>
+                            <td>@exam.Duration</td>
+                            <td>@exam.CreationDate.ToString("dd/MM/yyyy")</td>
+                            <td>@exam.Course.Name</td>
+                            <td>@grade</td>
+                            <td style="text-align: right; padding-right: 24px;">
+                                <a href="exam.html" class="btn @(grade == "Not assigned" ? "btn-primary" : "disabled btn-secondary")" style="padding: 4px 8px;">View Exam</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
