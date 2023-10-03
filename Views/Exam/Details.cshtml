@@ -1,0 +1,183 @@
+﻿@{
+    Layout = null;
+}
+@using Newtonsoft.Json;
+
+@model List<Student_Panel_ITI.Models.Exam_Question>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+                padding: 0;
+                padding-top: 24px;
+            }
+
+            ul {
+                padding-left: 24px;
+            }
+
+            .container {
+                width: 450px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .questionsContainer {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-top: 0;
+                text-align: center;
+            }
+
+            label {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            input[type="radio"] {
+                margin: 8px 0;
+            }
+
+            #btnContainer {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            button[type="submit"] {
+                padding: 10px 15px;
+                background-color: #4caf50;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                font-size: 16px;
+                cursor: pointer;
+                width: 175px;
+                margin: 24px auto 0;
+            }
+
+                button[type="submit"]:hover,
+                button#submitExam:hover {
+                    background-color: #45a049;
+                }
+
+            .question {
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                padding: 10px;
+                border-radius: 4px;
+                text-align: center;
+            }
+
+                .question h3 {
+                    margin-top: 0;
+                }
+
+            .choices li {
+                list-style-type: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>@ViewBag.examName</h1>
+        <div class="questionsContainer">
+            @{
+                List<string> correctAnswers = new List<string>();
+            }
+            @foreach(var question in Model)
+            {
+                correctAnswers.Add(question.Question.Answer);
+                var questionBody = question.Question.Body;
+                int qmIndex = questionBody.IndexOf('?');
+                string body = questionBody.Substring(0, qmIndex + 1);
+                string[] choices = questionBody.Substring(qmIndex + 1).Split(',');
+
+
+                <div class="container" id="@question.QuestionID">
+                    <div id="question-container">
+                        <div class="question">
+                            <h3>@body</h3>
+                        </div>
+                        <ul class="choices">
+                            @foreach (var choice in choices)
+                            {
+                                <li>
+                                    <input type="radio" id="@choice" name="@body.Substring(0, 13)">
+                                    <label for="@choice">@choice</label>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="btnContainer">
+            <button id="submit-btn" type="submit">Submit</button>
+        </div>
+
+        <form asp-controller="Exam" asp-action="Details" id="formSubmit">
+            <input type="hidden" name="studentResults" id="submitResults" value=""/>
+            <input type="hidden" name="examId" value="@ViewBag.examId" />
+            <input type="hidden" name="parentIds" id="submitParentIds" value="" />
+        </form>
+
+
+        <script>
+            var submitBtn = document.getElementById("submit-btn");
+            let studentAnswers = [];
+            let parentIds = [];
+            submitBtn.addEventListener('click', function () {
+                const confirmed = confirm("Please double check your answers before submitting, there is no back !!!!");
+                if (confirmed) {
+
+                    // array of checked checkboxes
+                    let checkedAnswers = document.querySelectorAll('input[type="radio"]:checked');
+
+                    for (const checkedAnswer of checkedAnswers) {
+                        const label = document.querySelector(`label[for="${checkedAnswer.id}"]`);
+                        // array of student's answer
+                        studentAnswers.push(label.textContent.trim());
+
+                        const parentDiv = checkedAnswer.closest('.container');
+                        const parentId = parentDiv.id;
+
+                        parentIds.push(parentId);
+
+                    }
+
+                    var studentAnswersStr = JSON.stringify(studentAnswers);
+                    var parentIdsStr = JSON.stringify(parentIds);
+
+                    document.getElementById("submitResults").value = studentAnswersStr;
+                    document.getElementById("submitParentIds").value = parentIdsStr;
+
+                    console.log(studentAnswersStr);
+                    console.log(parentIdsStr);
+
+                    document.getElementById("formSubmit").submit();
+                }
+            });
+        </script>
+    </body>
+</html>

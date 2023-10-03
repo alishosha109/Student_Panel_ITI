@@ -51,7 +51,7 @@ namespace Student_Panel_ITI.Repos.RepoServices
 
         List<Exam_Std_Question> IExam_Std_QuestionRepository.GetExambyExamID(int exmID)
         {
-            return Context.Exam_Std_Questions.Where(e => e.ExamID == exmID).ToList();
+            return Context.Exam_Std_Questions.Where(e => e.ExamID == exmID).Include(e => e.Question).ToList();
         }
 
         List<Exam_Std_Question> IExam_Std_QuestionRepository.GetExamsbyqid(int qid)

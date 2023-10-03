@@ -21,7 +21,7 @@ namespace Student_Panel_ITI.Models
         public string Answer { get; set; }
 
         [Required]
-        public double Mark { get; set; }
+        public int Mark { get; set; }
 
 
 

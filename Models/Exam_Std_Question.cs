@@ -14,19 +14,14 @@ namespace Student_Panel_ITI.Models
         public int StudentGrade { get; set; }
 
 
-
-
-
         [ForeignKey(nameof(Student))]
         public string StudentID { get; set; }
         public virtual Student? Student { get; set; }
 
 
-
         [ForeignKey(nameof(Exam))]
         public int ExamID { get; set; }
         public virtual Exam? Exam { get; set; }
-
 
 
         [ForeignKey(nameof(Question))]
