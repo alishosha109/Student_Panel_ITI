@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Student_Panel_ITI.Models
 {
-    public enum QuestionType { TF, Choose, Essay, NA }
 
     [Table("Question")]
     public class Question
@@ -11,8 +10,7 @@ namespace Student_Panel_ITI.Models
         [Key]
         public int ID { get; set; }
 
-        [/*Required,*/ EnumDataType(typeof(QuestionType))]
-        public QuestionType? Type { get; set; }
+        public string Type { get; set; }
 
         [Required]
         public string Body { get; set; }
