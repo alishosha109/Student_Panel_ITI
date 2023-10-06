@@ -105,14 +105,15 @@
             @{
                 List<string> correctAnswers = new List<string>();
             }
-            @foreach(var question in Model)
+            @*@foreach(var question in Model)*@
+            @for(int i=0; i< Model.Count(); i++)
             {
+                var question = Model[i];
                 correctAnswers.Add(question.Question.Answer);
                 var questionBody = question.Question.Body;
                 int qmIndex = questionBody.IndexOf('?');
                 string body = questionBody.Substring(0, qmIndex + 1);
                 string[] choices = questionBody.Substring(qmIndex + 1).Split(',');
-
 
                 <div class="container" id="@question.QuestionID">
                     <div id="question-container">
@@ -123,7 +124,7 @@
                             @foreach (var choice in choices)
                             {
                                 <li>
-                                    <input type="radio" id="@choice" name="@body.Substring(0, 8)">
+                                    <input type="radio" id="@choice" name="c + @i">
                                     <label for="@choice">@choice</label>
                                 </li>
                             }
