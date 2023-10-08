@@ -25,6 +25,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+
+        <style>
+
+        </style>
     </head>
     <body>
         <!-- navbar -->
@@ -119,10 +123,10 @@
         <div class="row">
             <!-- Sidebar -->
             <div class="col-3 col-md-2  sidebar">
-                <div class="d-flex flex-column flex-shrink-0 bg-body-tertiary" style="height: 100vh">
+                <div class="d-flex flex-column flex-shrink-0 p-lg-4 bg-body-tertiary" style="height: 100vh">
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item navs">
-                            <a asp-action="Index" asp-controller="Home" class="nav-link link-body-emphasis @(current == "Home" ? "act" : "")" aria-current="page">
+                            <a asp-action="Index" asp-controller="Home" class="nav-link link-body-emphasis hvr-bounce-to-right @(current == "Home" ? "act" : "")" aria-current="page">
                                 <img src="~/assets/images/@(current == "Home" ? "White" : "Gray")/details.svg" class="bi pe-none me-2" width="32" height="32" />
                                 <span style="color: @(current == "Home" ? "white" : "black")" ;">Details</span>
                             </a>
@@ -133,13 +137,13 @@
                                asp-route-trackID=@student.TrackID
                                asp-route-intakeID=@student.IntakeID
                                asp-route-trackName=@student.Track.Name
-                               asp-action="DetailsForStudent" class="nav-link link-body-emphasis @(current == "Course" ? "act" : "")">
+                               asp-action="DetailsForStudent" class="nav-link link-body-emphasis hvr-bounce-to-right @(current == "Course" ? "act" : "")">
                                 <img src="~/assets/images/@(current == "Course" ? "White" : "Gray")/course.svg" class="bi pe-none me-2" width="32" height="32" />
                                 <span style="color: @(current == "Course" ? "white" : "black")" ;">Courses</span>
                             </a>
                         </li>
                         <li class="nav-item navs">
-                            <a asp-action="Index" asp-controller="Exam" class="nav-link link-body-emphasis @(current == "Exam" ? "act" : "")">
+                            <a asp-action="Index" asp-controller="Exam" class="nav-link link-body-emphasis hvr-bounce-to-right @(current == "Exam" ? "act" : "")">
                                 <img src="~/assets/images/@(current == "Exam" ? "White" : "Gray")/exam.svg" class="bi pe-none me-2" width="32" height="32" />
                                 <span style="color: @(current == "Exam" ? "white" : "black")" ;">Exams</span>
                             </a>
@@ -150,7 +154,24 @@
             <!-- Main (tales + btns) -->
             @RenderBody()
         </div>
-    </div>
+    </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
         <script src="~/script.js"></script>
     </body>
