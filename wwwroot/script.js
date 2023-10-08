@@ -92,6 +92,12 @@ function clicked() {
     floatingScreen.classList.add("show");
 }
 
+/* preloader script */
+var $window = $(window);
 
-
+$window.on('load', function () {
+    $('#preloader').fadeOut('slow', function () {
+        $(this).remove();
+    });
+});
 

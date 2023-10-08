@@ -28,7 +28,7 @@
     </head>
     <body>
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="light">
+        @* <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="light">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-action="Index" asp-controller="Home" style="margin-left: 24px;">
                     <img src="~/assets/images/iti-logo.png" alt="Logo" width="33" height="50" class="d-inline-block align-text-top">
@@ -43,9 +43,10 @@
                 </div>
                 </div>
             </div>
-        </nav>
+        </nav> *@
 
-        <div class="">
+
+        @* <div class="">
             <div class="row">
                 <!-- Sidebar -->
                 <div class="col-md-2 sidebar">
@@ -84,7 +85,73 @@
                 <!-- Main (tales + btns) -->
                 @RenderBody()
             </div>
+        </div> *@
+
+        @*====================================================*@
+        @*====================================================*@
+        @*====================================================*@
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="itiHub-load"></div>
+        <img src="~/images/iti-hub-logo.png" alt="logo">
+    </div>
+
+
+    <nav class="navbar navbar-expand-sm bg-body-tertiary slide-down">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-action="Index" asp-controller="Home">
+                <img src="~/assets/images/iti-logo.png" alt="Logo" width="33" height="50" class="d-inline-block align-text-top">
+                <div class="iti-hub-devider">
+                    <span> Hub </span>
+                </div>
+            </a>
+            <div class="justify-content-end" id="navbarSupportedContent">
+                <form id="logoutForm" class="d-flex navbar-user-buttons" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" class="nav-link btn logoutbtn btn-link text-dark border-0" type="submit">Logout</button>
+                </form>
+            </div>
         </div>
+    </nav>
+
+
+    <div class="container-fluid slide-right sidebar_animation">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-3 col-md-2  sidebar">
+                <div class="d-flex flex-column flex-shrink-0 bg-body-tertiary" style="height: 100vh">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item navs">
+                            <a asp-action="Index" asp-controller="Home" class="nav-link link-body-emphasis @(current == "Home" ? "act" : "")" aria-current="page">
+                                <img src="~/assets/images/@(current == "Home" ? "White" : "Gray")/details.svg" class="bi pe-none me-2" width="32" height="32" />
+                                <span style="color: @(current == "Home" ? "white" : "black")" ;">Details</span>
+                            </a>
+                        </li>
+                        <li class="nav-item navs">
+                            <a asp-controller="Course"
+                               asp-route-studentID=@student.AspNetUserID
+                               asp-route-trackID=@student.TrackID
+                               asp-route-intakeID=@student.IntakeID
+                               asp-route-trackName=@student.Track.Name
+                               asp-action="DetailsForStudent" class="nav-link link-body-emphasis @(current == "Course" ? "act" : "")">
+                                <img src="~/assets/images/@(current == "Course" ? "White" : "Gray")/course.svg" class="bi pe-none me-2" width="32" height="32" />
+                                <span style="color: @(current == "Course" ? "white" : "black")" ;">Courses</span>
+                            </a>
+                        </li>
+                        <li class="nav-item navs">
+                            <a asp-action="Index" asp-controller="Exam" class="nav-link link-body-emphasis @(current == "Exam" ? "act" : "")">
+                                <img src="~/assets/images/@(current == "Exam" ? "White" : "Gray")/exam.svg" class="bi pe-none me-2" width="32" height="32" />
+                                <span style="color: @(current == "Exam" ? "white" : "black")" ;">Exams</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Main (tales + btns) -->
+            @RenderBody()
+        </div>
+    </div>
+
         <script src="~/script.js"></script>
     </body>
 </html>

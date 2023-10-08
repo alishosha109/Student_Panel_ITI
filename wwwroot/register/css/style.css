@@ -665,3 +665,13 @@ label.valid {
   text-decoration: none;
   color: white;
 }
+
+@media (max-width: 768px)
+{
+    .signin-form {
+        display: table;
+        margin: 0 auto;
+        position: relative;
+        top: 50px;
+    }
+}

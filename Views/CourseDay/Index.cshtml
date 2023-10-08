@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<CourseDay>
 
-
+@* 
 <div class="col-md-10 text-center content">
     <div class="container-fluid">
         <div class="row col-md-12">
@@ -23,4 +23,34 @@
             }
         </div>
     </div>
+</div> *@
+
+
+
+
+
+@*=======================================*@
+@*=======================================*@
+@*=======================================*@
+
+
+
+<div class="col-9 col-md-10 text-center content days-card-container">
+        <div class="r1">
+            <h3 style="padding-left: 33px;">Course days in @ViewBag.Name course</h3>
+        </div>
+    <div class="days-card">
+            @foreach (var day in Model)
+            {
+            <a class="box" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);"
+               asp-action="Details"
+                   asp-controller="CourseDay"
+                   asp-route-Id=@ViewBag.Id
+                   asp-route-name=@ViewBag.Name
+                   asp-route-coursedayID=@day.ID
+                   asp-route-coursedayNum=@day.DayNumber>
+                    <h2>Day @day.DayNumber</h2>
+                </a>
+            }
+        </div>
 </div>

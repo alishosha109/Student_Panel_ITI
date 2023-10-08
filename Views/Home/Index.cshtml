@@ -3,9 +3,9 @@
 
 <style>
     .wrapper {
-        display: flex;
-        justify-content: center;
-        margin-top: 70px;
+        display: table;
+        margin: 0 auto;
+        padding-top: 100px;
     }
 
     .card1 {
@@ -132,11 +132,12 @@
         position: relative;
     }
 
+
 </style>
 
 
 
-<div class="col-md-10 text-center content">
+@* <div class="col-md-10 text-center content">
     <div class="container-fluid">
         <div class="row col-md-12">
             <div class="r1" style="padding-bottom: 0;">
@@ -173,4 +174,54 @@
             </div>
         </div>
     </div>
+</div> *@
+
+
+
+                            @*===================================*@
+                            @*===================================*@
+                            @*===================================*@
+
+
+
+
+<div class="col-9 col-md-10 text-center content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="r1" style="padding-bottom: 0;">
+                <h3 style="padding-left: 33px;">Your Details</h3>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="card1">
+                <div class="circle">
+                    <img src="~/images/user.svg" alt="User Image" class="user-image">
+                </div>
+                <div class="content">
+                    <p class="heading">@Model.AspNetUser.FullName</p>
+
+                    <div class="wrapprer">
+                        <p class="para"><img class="img" src="~/images/calendar.svg" />@Model.CreationDate.ToString("dd/MM/yyyy")</p>
+                        <p class="para"><img class="img" src="~/images/email.svg" />@Model.AspNetUser.Email</p>
+                        <p class="para"><img class="img" src="~/images/phone.svg" />@Model.AspNetUser.PhoneNumber</p>
+                        @if (@Model.IsGraduated)
+                        {
+                            <p class="para"><img class="img" src="~/images/graduate.svg" />You are graduated</p>
+                        }
+                        else
+                        {
+                            <p class="para"><img class="img" src="~/images/student.svg" />You are student</p>
+                        }
+                    </div>
+
+
+                    <br />
+                    <small id="intake">@Model.Intake.Name</small>
+                    <small id="track">@Model.Track.Name</small>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+        

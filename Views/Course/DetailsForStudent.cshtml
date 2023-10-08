@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Course>
 
-<div class="col-md-10 text-center content">
+@* <div class="col-md-10 text-center content">
     <div class="container-fluid">
         <div class="row col-md-12">
             <div class="r1">
@@ -22,4 +22,25 @@
             }
         </div>
     </div>
+</div> *@
+
+
+<div class="col-9 col-md-10 text-center content details-for-student">
+            <div class="r1">
+                <h3>Courses you study in @ViewBag.TracKName track</h3>
+                <div>
+                    <a href="#" class="btn courseBtns">Show all exams</a>
+                </div>
+            </div>
+            <div class="details-for-student-box">
+            @foreach (var course in Model)
+            {
+                <a class="box" asp-action="Index"
+                   asp-route-Id=@course.ID
+                   asp-route-Name=@course.Name
+                   asp-controller="CourseDay">
+                    <h2>@course.Name</h2>
+                </a>
+            }
+            </div>
 </div>

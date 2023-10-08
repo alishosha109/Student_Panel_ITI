@@ -7,7 +7,7 @@
     CourseDay crsDay = (CourseDay)ViewBag.CourseDay;
 
 }
-
+@* 
 <div class="col-md-10 text-center content">
     <div class="container-fluid">
         <div class="row col-md-12">
@@ -79,7 +79,92 @@
         </div>
       
     </div>
+</div> *@
+
+
+
+@*=========================================*@
+@*=========================================*@
+@*=========================================*@
+@*=========================================*@
+
+
+
+
+<div class="col-9 col-md-10 text-center content course-day-details">
+        <div class="col-md-12">
+            <div class="r1">
+                <h3>Day 1 material</h3>
+                <div class="day1-material" style="display: flex;">
+                    <form id="uploadForm" enctype="multipart/form-data"
+                          method="post"
+                          asp-action="UploadSubmissions"
+                          asp-controller="CourseDay"
+                          asp-route-id="@ViewBag.Id"
+                          asp-route-name="@ViewBag.Name"
+                          asp-route-coursedayID="@ViewBag.CourseDayId"
+                          asp-route-coursedayNum="@ViewBag.CourseDayNum">
+                        <div class="file btn courseBtns">
+                            Upload Submissions
+                            <input type="file" id="fileInput" name="file" multiple />
+                        </div>
+                    </form>
+
+                  
+                    <a href="@crsDay.TaskPath" download class="btn courseBtns" style="padding: 8px 13px;">
+                        Download Task
+                    </a>
+                </div>
+            </div>
+        </div>
+            <table class="table table-hover course-day-table" id="myTable">
+                <thead class="table-secondary">
+                    <tr>
+                        <th style="padding-left: 24px;">
+                            Material
+                            <svg onclick="sortTable(0)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </th>
+                        <th>
+                            Type
+                            <svg onclick="sortTable(1)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var courseDayMaterial in Model)
+                    {
+                        <tr>
+                            <td style="padding-left: 24px; padding-top: 16px;">@courseDayMaterial.MaterialOfDay.Name</td>
+                            <td style="padding-top: 16px;">@courseDayMaterial.MaterialOfDay.Type</td>
+                            <td style="text-align: right;">
+                                <a href="@courseDayMaterial.MaterialOfDay.Path" download class="btn btn-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                    </svg>
+                                    Download
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                 
+                    
+                    
+                </tbody>
+            </table>
+      
 </div>
+
+
+
+
+
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
