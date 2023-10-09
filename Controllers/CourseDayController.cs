@@ -83,7 +83,6 @@ namespace Student_Panel_ITI.Areas.InstructorsArea.Controllers
 
             }
 
-
             return View(courseDayMaterialRepo.GetCourseDaysbyCourseDayID(coursedayID));
         }
 

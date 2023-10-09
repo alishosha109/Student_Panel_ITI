@@ -179,18 +179,14 @@
             }
         });
 
-        // // Check if ViewBag.hassumit is true and disable the button accordingly
-        // const hasSubmit = @ViewBag.hassumit; // Convert ViewBag value to JavaScript variable
-        // const fileInputButton = document.querySelector(".file.btn.courseBtns input[type='file']");
 
-        // if (hasSubmit) {
-        //     fileInputButton.disabled = true;
-        // }
+        // Show an alert when the file input is clicked and disabled
+        fileInput.addEventListener("click", function () {
+            if (fileInput.disabled) {
+                alert("You cannot upload submissions because it is disabled.");
+            }
+        });
 
-        // Check if ViewBag.hassubmit is true and show an alert in else
-        const hasSubmit = @ViewBag.hassubmit; // Convert ViewBag value to JavaScript variable
-        if (!hasSubmit) {
-            alert("You can upload submissionsalready.");
-        }
     });
+
 </script>
