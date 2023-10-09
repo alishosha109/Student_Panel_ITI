@@ -1,5 +1,9 @@
 /* *********************************************************************** */
 /* Index */
+/*html , body
+{
+    overflow-y: hidden;
+}*/
 
 * {
     margin: 0;
@@ -72,8 +76,8 @@ body {
     padding: 8px 24px;
 }
 
-.logoutbtn{
-    background-color: #E03030; 
+.logoutbtn {
+    background-color: #b72025;
     color: #fff !important;
 }
 
@@ -281,7 +285,7 @@ input[type="checkbox"] {
     height: 200px;
     background-color: white;
     border-radius: 10px;
-    /*box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);*/
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -432,12 +436,15 @@ input[type="file"] {
     }
 }
 /* navbar*/
+.navbar-brand {
+    padding-left: 1.5rem;
+}
 
 .iti-hub-devider {
     border-left: 2px solid #901b20;
     height: 50px;
     position: absolute;
-    left: 49px;
+    left: 75px;
     top: 20px;
 }
 
@@ -452,15 +459,19 @@ input[type="file"] {
 }
 /*details-for-student*/
 .details-for-student .details-for-student-box {
-    display: flex;
-    justify-content: center;
-    background: white;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+     display: flex;
+     flex-flow: row wrap;
+     justify-content: space-around;
 }
+.details-for-student .details-for-student-box a h2
+{
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
 .details-for-student .r1 {
-    padding-right:0;
-    padding-bottom:30px;
+    padding-right: 0;
+    padding-bottom: 30px;
     display: block;
 }
 .details-for-student .r1 h3 
@@ -486,7 +497,7 @@ input[type="file"] {
 }
 
 
-
+ 
 
 /*animation*/
 .slide-down {
@@ -577,7 +588,7 @@ input[type="file"] {
     vertical-align: middle;
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
-    /*box-shadow: 0 0 1px rgba(0, 0, 0, 0);*/
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
     border-radius: 10px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     position: relative;
@@ -611,7 +622,7 @@ input[type="file"] {
         transition-timing-function: ease-out;
     }
 
-    .hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {
+/*    .hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {
         color: #000 !important;
     }
 
@@ -620,7 +631,7 @@ input[type="file"] {
             transform: scaleX(1);
             -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
             transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
-        }
+        }*/
 
 /*animation for cards*/
 .sidebar_animation .hvr-bounce-to-right {
@@ -650,7 +661,7 @@ input[type="file"] {
         transition-timing-function: ease-out;
     }
 
-    .sidebar_animation .hvr-bounce-to-right:hover, .sidebar_animation .hvr-bounce-to-right:focus,
+   /* .sidebar_animation .hvr-bounce-to-right:hover, .sidebar_animation .hvr-bounce-to-right:focus,
     .sidebar_animation .hvr-bounce-to-right:active {
         color: #000 !important;
     }
@@ -665,7 +676,7 @@ input[type="file"] {
 
         .sidebar_animation .hvr-bounce-to-right:hover span {
             color: #fff !important;
-        }
+        }*/
 
 .sidebar_animation li {
     padding: 10px 0;
@@ -673,21 +684,15 @@ input[type="file"] {
 
 /*Media query*/
 @media (max-width: 991px) {
-/*    .nav-title
-    {
-        font-size: 14px;
-    }*/
-    .nav-item span {
-        font-size: 14px;
-        float: right;
-        position: relative;
-        top: 3px;
-        width: 59%;
+    .iti-hub-devider {
+        left: 49px;
     }
-
-    .nav-item img {
-        width: 30%;
-        height: 30%;
+    .navbar-brand {
+        padding-left: 0;
+    }
+    .sidebar
+    {
+        padding-top: 1rem;
     }
 
     .nav-title {
@@ -695,19 +700,6 @@ input[type="file"] {
         padding-top: 10px;
     }
 
-    .nav-item span {
-        font-size: 12px;
-        float: right;
-        position: relative;
-        top: 3px;
-        width: 59%;
-    }
-
-    .nav-item img {
-        margin: 0;
-        width: 25%;
-        height: 25%;
-    }
     .details-for-student .details-for-student-box {
         display: table;
         margin: 0 auto;
@@ -747,7 +739,7 @@ input[type="file"] {
         height: 22px;
     }
     .exam-index table {
-        width: 280%;
+        width: 150%;
     }
     .exam-index table th {
         width: auto;
@@ -792,5 +784,28 @@ input[type="file"] {
     {
         width: 270px !important;
     }
+    .exam-index table {
+        width: 280%;
+    }
+
 }
 
+@media (min-width:543px) and (max-width:638px) {
+    .sidebar a {
+        font-size: 10px;
+        padding: 8px;
+    }
+}
+
+@media (min-width: 1147px) and (max-width:1325px) {
+    .sidebar a {
+        font-size: 10px;
+        padding: 8px;
+    }
+}
+@media (min-width:884px) and (max-width:955px) {
+    .sidebar a {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
