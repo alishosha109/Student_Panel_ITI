@@ -186,5 +186,11 @@
         // if (hasSubmit) {
         //     fileInputButton.disabled = true;
         // }
+
+        // Check if ViewBag.hassubmit is true and show an alert in else
+        const hasSubmit = @ViewBag.hassubmit; // Convert ViewBag value to JavaScript variable
+        if (!hasSubmit) {
+            alert("You can upload submissionsalready.");
+        }
     });
 </script>
