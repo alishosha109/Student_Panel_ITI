@@ -36,13 +36,13 @@ namespace Admin_Panel_ITI.Areas.InstructorsArea.Controllers
         }
 
         // GET: ExamController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, int duration)
         {
             string examName = examRepository.GetExambyID(id).Name;
             ViewBag.examName = examName;
             ViewBag.examId = id;
+            ViewBag.duration = duration;
             return View(exam_QuestionRepository.GetExamsRecordsbyExamID(id));
-            //return View(exam_Std_QuestionRepository.GetExambyExamID(id));
         }
 
         [HttpPost]

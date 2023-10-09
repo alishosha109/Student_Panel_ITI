@@ -2,6 +2,8 @@
 @model IEnumerable<Student_Panel_ITI.Models.Exam>
 @inject IExam_Std_QuestionRepository examStdQuestion
 
+
+
          
 <!-- Main (tales + btns) -->
 <div class="col-9 col-md-10 text-center content exam-index">
@@ -72,7 +74,7 @@
                             <td>@exam.Course.Name</td>
                             <td>@grade</td>
                             <td style="text-align: right; padding-right: 24px;">
-                                <a asp-route-id="@exam.ID" asp-action="Details" class="btn @(grade == "Not assigned" ? "btn-primary" : "disabled btn-secondary")" style="padding: 4px 8px;">View Exam</a>
+                                <a asp-route-id="@exam.ID" asp-route-duration="@exam.Duration" asp-action="Details" class="btn @(grade == "Not assigned" ? "btn-primary" : "disabled btn-secondary")" style="padding: 4px 8px;">View Exam</a>
                             </td>
                         </tr>
                     }

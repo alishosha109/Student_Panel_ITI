@@ -42,9 +42,9 @@ namespace Student_Panel_ITI.Repos
             return Context.Student_Submissions.ToList();
         }
 
-        List<Student_Submission> IStudent_SubmissionRepository.GetStudent_SubmissionsByStdIDCrsDayID(int studentID, int courseDayID)
+        bool IStudent_SubmissionRepository.GetStudent_SubmissionsByStdIDCrsDayID(string studentID, int courseDayID)
         {
-            var student_submission = Context.Student_Submissions.Where(ss => ss.StudentID == studentID.ToString() && ss.CourseDayID == courseDayID).ToList();
+            var student_submission = Context.Student_Submissions.Any(ss => ss.StudentID == studentID && ss.CourseDayID == courseDayID);
             return student_submission;
         }
 
@@ -135,6 +135,12 @@ namespace Student_Panel_ITI.Repos
                 Context.Student_Submissions.Remove(submission);
             }
             Context.SaveChanges();
+        }
+
+        bool IStudent_SubmissionRepository.GetStudent_SubmissionsByStdID(string studentID)
+        {
+            var student_submission = Context.Student_Submissions.Any(ss => ss.StudentID == studentID);
+            return student_submission;
         }
     }
 }

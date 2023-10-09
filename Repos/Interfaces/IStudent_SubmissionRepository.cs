@@ -12,7 +12,7 @@ namespace Student_Panel_ITI.Repos
 
         public Student_Submission GetStudent_Submission(int studentID,int courseDayID);
 
-        public List<Student_Submission> GetStudent_SubmissionsByStdIDCrsDayID(int studentID,int courseDayID);
+        public bool GetStudent_SubmissionsByStdIDCrsDayID(string studentID,int courseDayID);
         public List<Student_Submission> GetStudent_SubmissionsByStdIDCrsDayID(int studentIDs);
 
 
@@ -28,7 +28,7 @@ namespace Student_Panel_ITI.Repos
         public void DeleteStudent_Submission(string studentID);
         public void DeleteStudent_SubmissionbyCourseDayID(int courseDayID);
 
-
+        bool GetStudent_SubmissionsByStdID (string studentID);
         public void CreateStudent_Submission(Student_Submission student_Submission);
         public void CreateStudent_Submission(List<Student_Submission> student_Submission);
         public void CreateStudent_Submission(int stdID, int crsDayID, string submissionPath);

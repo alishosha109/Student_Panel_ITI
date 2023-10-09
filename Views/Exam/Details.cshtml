@@ -5,108 +5,138 @@
 
 @model List<Student_Panel_ITI.Models.Exam_Question>
 
+@{
+    var duration = ViewBag.duration;
+    Console.WriteLine(duration);
+}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <style>
-            * {
-                box-sizing: border-box;
-            }
+    <style>
 
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f2f2f2;
-                padding: 0;
-                padding-top: 24px;
-            }
 
-            ul {
-                padding-left: 24px;
-            }
+/*        .countdown::after {
+        grid-column: 1;
+        grid-row: 1;
+        place-self: center;
+        font: 2em/2 ubuntu mono, consolas, monaco, monospace;
+        animation: num @(duration)s steps(1) infinite;
+/*         animation: num 20s steps(1) infinite;
+*/        content: "0:" counter(s, decimal-leading-zero);
+        } */
 
-        .container {
-            width: 450px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+        * {
+            box-sizing: border-box;
         }
 
-        .questionsContainer {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 0;
+            padding-top: 24px;
+        }
+
+        ul {
+            padding-left: 24px;
+        }
+
+    .container {
+        width: 450px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .questionsContainer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+        h1 {
+            font-size: 24px;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="radio"] {
+            margin: 8px 0;
+        }
+
+        #btnContainer {
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
         }
 
-            h1 {
-                font-size: 24px;
+        button[type="submit"] {
+            padding: 10px 15px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 175px;
+            margin: 24px auto 0;
+        }
+
+            button[type="submit"]:hover,
+            button#submitExam:hover {
+                background-color: #45a049;
+            }
+
+        .question {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+            .question h3 {
                 margin-top: 0;
-                text-align: center;
             }
 
-            label {
-                font-weight: bold;
-                margin-bottom: 5px;
+        .choices li {
+            list-style-type: none;
+        }
+        @@media (min-width: 425px) and (max-width: 691px) {
+            .container 
+            {
+                width: 350px;
             }
-
-            input[type="radio"] {
-                margin: 8px 0;
-            }
-
-            #btnContainer {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            button[type="submit"] {
-                padding: 10px 15px;
-                background-color: #4caf50;
-                color: #fff;
-                border: none;
-                border-radius: 4px;
-                font-size: 16px;
-                cursor: pointer;
-                width: 175px;
-                margin: 24px auto 0;
-            }
-
-                button[type="submit"]:hover,
-                button#submitExam:hover {
-                    background-color: #45a049;
-                }
-
-            .question {
-                margin-bottom: 20px;
-                border: 1px solid #ccc;
-                padding: 10px;
-                border-radius: 4px;
-                text-align: center;
-            }
-
-                .question h3 {
-                    margin-top: 0;
-                }
-
-            .choices li {
-                list-style-type: none;
-            }
-            @@media (min-width: 425px) and (max-width: 691px) {
-                .container 
-                {
-                    width: 350px;
-                }
-            }
+        }
   
-        </style>
+    </style>
+
+@*     <link rel="stylesheet" href = "~/Examstyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script> *@
+
     </head>
     <body>
+@* 
+        <div  class="countdown">
+            <svg viewBox="-50 -50 100 100" stroke-width="10">
+                <circle r="45"></circle>
+                <circle r="45" stroke-dasharray="282.7433388230814" stroke-dashoffset="282.7433388230814px"></circle>
+            </svg>
+        </div>
+ *@
+
         <h1>@ViewBag.examName</h1>
         <div class="questionsContainer">
             @{
@@ -186,6 +216,40 @@
                     document.getElementById("formSubmit").submit();
                 }
             });
-        </script>
+
+        // // Get the countdown element
+        // const countdown = document.querySelector(".countdown");
+
+        // // Function to update the countdown text
+        // function updateCountdownText() {
+        //     const percentage = (100 - ((parseInt(countdownText.style.animationPlayState) * 100) % 100));
+        //     countdownText.textContent = `0:${Math.floor(percentage / 5)}`;
+        // }
+
+        // // Function to update the countdown arc
+        // function updateCountdownArc() {
+        //     const percentage = (100 - ((parseInt(path2.style.animationPlayState) * 100) % 100));
+        //     const dashOffset = ((50 * Math.PI) / 100) * (percentage / 100);
+        //     path2.style.strokeDashoffset = `${dashOffset}px`;
+        // }
+
+        // // Update the countdown duration based on ViewBag.duration
+        // const countdownDuration = parseInt("@ViewBag.duration") * 1000; // Convert seconds to milliseconds
+
+        // // Set up the countdown text animation with the updated duration
+        // const countdownText = document.querySelector(".countdown::after");
+        // countdownText.style.animation = `num ${countdownDuration}ms steps(1) infinite`;
+        // countdownText.style.animationPlayState = "running";
+
+        // // Set up the countdown arc animation with the updated duration
+        // const path2 = document.querySelector(".countdown svg path:last-child");
+        // path2.style.animation = `arc ${countdownDuration}ms linear infinite`;
+        // path2.style.animationPlayState = "running";
+
+        // // Update the countdown text and arc initially
+        // updateCountdownText();
+        // updateCountdownArc();
+
+    </script>
     </body>
 </html>

@@ -27,6 +27,7 @@ namespace Student_Panel_ITI.Areas.InstructorsArea.Controllers
         {
             courseDayRepo = _courseDayRepo;
             webHostingEnvironment = _hostingEnvironment;
+            
             userManager = _userManager;
             materialRepo = _materialRepo;
             courseDayMaterialRepo = _courseDayMaterialRepo;
@@ -38,7 +39,7 @@ namespace Student_Panel_ITI.Areas.InstructorsArea.Controllers
 
         //id(courseID) , name(courseName)
         public ActionResult Index(int id , string name)
-        {
+        {   
             ViewBag.Id = id;    
             ViewBag.Name = name;  
              
@@ -65,6 +66,23 @@ namespace Student_Panel_ITI.Areas.InstructorsArea.Controllers
             ViewBag.CourseDayNum = coursedayNum;
 
             ViewBag.Submissions = new List<IFormFile>();
+
+            string studentID = userManager.GetUserId(User);
+
+            var submissions = studentSubmissionRepo.GetStudent_SubmissionsByStdIDCrsDayID(studentID, coursedayID);
+
+            if (submissions)
+            {
+                ViewBag.hassubmit = true;
+
+            }
+            else
+            {
+                ViewBag.hassubmit = false;
+
+
+            }
+
 
             return View(courseDayMaterialRepo.GetCourseDaysbyCourseDayID(coursedayID));
         }

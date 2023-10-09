@@ -104,10 +104,17 @@
                           asp-route-name="@ViewBag.Name"
                           asp-route-coursedayID="@ViewBag.CourseDayId"
                           asp-route-coursedayNum="@ViewBag.CourseDayNum">
-                        <div class="file btn courseBtns">
-                            Upload Submissions
+                    <div class="file btn courseBtns">
+                        Upload Submissions
+                        @if (ViewBag.hassubmit)
+                        {
+                            <input type="file" id="fileInput" name="file" multiple disabled />
+                        }
+                        else
+                        {
                             <input type="file" id="fileInput" name="file" multiple />
-                        </div>
+                        }
+                    </div>
                     </form>
 
                   
@@ -152,16 +159,11 @@
                             </td>
                         </tr>
                     }
-                 
-                    
-                    
+                   
                 </tbody>
             </table>
       
 </div>
-
-
-
 
 
 
@@ -173,9 +175,16 @@
 
         fileInput.addEventListener("change", function () {
             if (fileInput.files.length > 0) {
-                
                 uploadForm.submit();
             }
         });
+
+        // // Check if ViewBag.hassumit is true and disable the button accordingly
+        // const hasSubmit = @ViewBag.hassumit; // Convert ViewBag value to JavaScript variable
+        // const fileInputButton = document.querySelector(".file.btn.courseBtns input[type='file']");
+
+        // if (hasSubmit) {
+        //     fileInputButton.disabled = true;
+        // }
     });
 </script>
